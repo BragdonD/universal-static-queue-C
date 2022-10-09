@@ -59,5 +59,9 @@ void* staticQueue_pop(static_queue* queue) {
 }
 
 bool resize(static_queue* queue, int size) {
+    void *arr = NULL;
+    arr = realloc(queue->arr, size * queue->elem_size);
+    if(arr == NULL) return false;
+    queue->arr = arr;
     return false;
 }
