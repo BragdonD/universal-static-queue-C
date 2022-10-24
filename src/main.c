@@ -7,7 +7,7 @@
 int main(int argc, char const *argv[])
 {
     static_queue* queue = staticQueue_init(sizeof(int), 10);
-    int elem = 0, choice = 0;
+    int elem = 0, choice = 0, *val = NULL;
 
     if(queue == NULL) return EXIT_FAILURE;
 
@@ -28,10 +28,20 @@ int main(int argc, char const *argv[])
             }
             break;
         case 2:
-            printf("Front element is : %d and is at index : %d.\n", *(int*)staticQueue_front(queue), queue->front_index);
+            val = (int*)staticQueue_front(queue);
+            if(val == NULL) {
+                printf("The queue is empty.\n");
+                continue;
+            }
+            printf("Front element is : %d and is at index : %d.\n", *val, queue->front_index);
             break;
         case 3:
-            printf("Rear element is : %d and is at index : %d.\n", *(int*)staticQueue_end(queue), queue->rear_index - 1);
+            val = (int*)staticQueue_end(queue);
+            if(val == NULL) {
+                printf("The queue is empty.\n");
+                continue;
+            }
+            printf("Rear element is : %d and is at index : %d.\n", *val, queue->rear_index - 1);
             break;
         case 4: {
             int* dequeu_elem = NULL;
@@ -44,7 +54,7 @@ int main(int argc, char const *argv[])
             break;
         }
         case 5:
-            staticQueue_empty(queue);
+            staticQueue_empty(queue, NULL);
             break;
         case 6:
             printf("Leaving...\n");

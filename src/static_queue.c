@@ -57,6 +57,7 @@ void staticQueue_empty(static_queue* queue, void (*free_data)(void*)) {
 /// @param queue a pointer toward a static queue
 /// @return a pointer toward the data at the front of the queue
 void* staticQueue_front(static_queue* queue) {
+    if(staticQueue_isEmpty(queue)) return NULL;
     return (char*)(queue->arr) + (queue->front_index * queue->elem_size);
 }
 
@@ -64,6 +65,7 @@ void* staticQueue_front(static_queue* queue) {
 /// @param queue a pointer toward a static queue
 /// @return a pointer toward the data at the end of the queue
 void* staticQueue_end(static_queue* queue) {
+    if(staticQueue_isEmpty(queue)) return NULL;
     return (char*)(queue->arr) + ((queue->rear_index - 1) * queue->elem_size);
 }
 
